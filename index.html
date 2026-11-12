@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Be Bodywise — Your Skin & Hair Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <span class="logo-leaf">🌿</span>
+    <span>Be Bodywise</span>
+  </div>
+  <div class="nav-links">
+    <a href="#" onclick="showSection('home')" class="nav-link active" id="nav-home">Home</a>
+    <a href="#" onclick="showSection('quiz')" class="nav-link" id="nav-quiz">Skin Quiz</a>
+    <a href="#" onclick="showSection('tracker')" class="nav-link" id="nav-tracker">Progress</a>
+    <a href="#" onclick="showSection('routine')" class="nav-link" id="nav-routine">⏰ Reminders</a>
+  </div>
+</nav>
+
+<!-- ===== HOME ===== -->
+<section id="home" class="section active">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-tag">✨ AI-Powered Skincare Guide</div>
+      <h1>Find What <span class="line2">Actually Works</span><br/>For Your Skin & Hair</h1>
+      <p>Stop guessing. Get personalized product recommendations based on your skin type, track your results week by week, and build a daily routine that actually fits your life.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showSection('quiz')">Take Free Quiz →</button>
+        <button class="btn-secondary" onclick="showSection('tracker')">Track Progress</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">6</div>
+          <div class="stat-label">Skin Concerns Covered</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">7</div>
+          <div class="stat-label">Quiz Questions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Personalized</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card-wrap">
+      <div class="hero-card">
+        <div class="hc-top">
+          <div>
+            <div class="hc-label">Your Skin Profile</div>
+            <div class="hc-type">Oily + Acne Prone</div>
+          </div>
+          <div class="hc-badge">Active</div>
+        </div>
+        <div class="hc-divider"></div>
+        <div class="hc-rec">
+          <div class="hc-rec-item"><div class="hc-check">✓</div> Salicylic Acid Face Wash</div>
+          <div class="hc-rec-item"><div class="hc-check">✓</div> Niacinamide 10% Serum</div>
+          <div class="hc-rec-item"><div class="hc-check">✓</div> Oil-Free SPF 40 Moisturizer</div>
+        </div>
+        <div class="hc-progress-section">
+          <div class="hc-progress-top">
+            <span class="hc-progress-label">Week 6 Progress</span>
+            <span class="hc-percent" id="heroPercent">0%</span>
+          </div>
+          <div class="hc-bar"><div class="hc-bar-fill" id="heroBar"></div></div>
+        </div>
+      </div>
+      <div class="float-card float-card-1">
+        <div class="fc-icon">📈</div>
+        <div class="fc-text">
+          <div class="fc-title">72% improvement</div>
+          <div class="fc-sub">in 6 weeks</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 64px;">
+    <div class="section-label">What You Get</div>
+    <div class="section-title">Everything You Need In One Place</div>
+    <div class="section-sub">No more jumping between apps — quiz, track, remind, and ask AI, all here.</div>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feat-icon-wrap">🎯</div>
+        <h3>Personalized Quiz</h3>
+        <p>Answer 7 questions about your skin type, concern, lifestyle & budget. Get products matched exactly to you.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon-wrap">📈</div>
+        <h3>Progress Tracker</h3>
+        <p>Log weekly ratings and watch your improvement on a chart. Finally know if your routine is working.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon-wrap">📋</div>
+        <h3>Daily Routine</h3>
+        <p>Save your morning & night routine. Tick off steps every day and stay consistent.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon-wrap">💬</div>
+        <h3>AI Skin Assistant</h3>
+        <p>Ask anything — ingredients, what products to mix, how long for results. Get expert answers instantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section id="quiz" class="section">
+  <div class="quiz-wrapper">
+    <div class="quiz-header">
+      <h2>Your Skin & Hair Quiz</h2>
+      <p>Answer honestly for the most accurate recommendations</p>
+      <div class="progress-track">
+        <div class="progress-bar-fill" id="quizProgressBar"></div>
+      </div>
+      <div class="quiz-step-meta">
+        <div class="quiz-step-label" id="quizStepLabel">Ready to start</div>
+        <div class="quiz-step-dots" id="stepDots"></div>
+      </div>
+    </div>
+    <div class="quiz-body" id="quizBody"></div>
+    <div class="quiz-nav">
+      <button class="btn-secondary" id="prevBtn" onclick="quizPrev()" style="display:none">← Back</button>
+      <button class="btn-primary" id="nextBtn" onclick="quizNext()">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULTS ===== -->
+<section id="results" class="section">
+  <div class="results-wrapper">
+    <div class="results-hero">
+      <div class="rh-left">
+        <div class="rh-badge">✨ Your Personalized Plan</div>
+        <div class="rh-title" id="resultsTitle">Your Skin Profile</div>
+        <div class="rh-sub" id="resultsSubtitle">Based on your answers — personalized just for you</div>
+      </div>
+      <div class="rh-score">
+        <div class="rh-score-num" id="matchScore">98%</div>
+        <div class="rh-score-label">Match Score</div>
+      </div>
+    </div>
+
+    <div class="results-section-title">🧴 Recommended Products</div>
+    <div class="results-grid" id="resultsGrid"></div>
+
+    <div class="results-section-title">📋 Your Daily Routine</div>
+    <div class="results-routine">
+      <div class="routine-timeline" id="routineTimeline"></div>
+    </div>
+
+    <div class="results-actions">
+      <button class="btn-primary" onclick="saveRoutine()">Save My Routine →</button>
+      <button class="btn-tracker" onclick="goToTracker()">📈 Log Today & Track Progress</button>
+      <button class="btn-secondary" onclick="retakeQuiz()">Retake Quiz</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRACKER ===== -->
+<section id="tracker" class="section">
+  <div class="tracker-wrapper">
+    <div class="page-header">
+      <h2>Progress Tracker</h2>
+      <p>Log your skin & mood — see if your routine is actually working</p>
+    </div>
+
+    <div id="trackerConcernBanner" class="tracker-concern-banner" style="display:none">
+      <span id="trackerConcernText">Tracking: Acne & Breakouts</span>
+      <span class="tcb-week" id="trackerWeekNum">Week 1</span>
+    </div>
+
+    <div class="tracker-grid">
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">📝</span> Log This Week</div>
+        <div class="log-form">
+          <div class="form-group">
+            <label id="skinRatingLabel">How is your skin / hair feeling?</label>
+            <div class="emoji-rating" id="skinRating">
+              <span class="emoji-opt" title="Very bad" onclick="selectRating(this,'skin',1)">😞</span>
+              <span class="emoji-opt" title="Bad" onclick="selectRating(this,'skin',2)">😕</span>
+              <span class="emoji-opt" title="Okay" onclick="selectRating(this,'skin',3)">😐</span>
+              <span class="emoji-opt" title="Good" onclick="selectRating(this,'skin',4)">🙂</span>
+              <span class="emoji-opt" title="Great!" onclick="selectRating(this,'skin',5)">😊</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>How consistent was your routine?</label>
+            <div class="emoji-rating" id="consistencyRating">
+              <span class="emoji-opt" title="Skipped most days" onclick="selectRating(this,'consistency',1)">😞</span>
+              <span class="emoji-opt" title="2-3 days" onclick="selectRating(this,'consistency',2)">😕</span>
+              <span class="emoji-opt" title="4-5 days" onclick="selectRating(this,'consistency',3)">😐</span>
+              <span class="emoji-opt" title="Most days" onclick="selectRating(this,'consistency',4)">🙂</span>
+              <span class="emoji-opt" title="Every day!" onclick="selectRating(this,'consistency',5)">😊</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Notes (optional)</label>
+            <textarea id="weekNotes" placeholder="e.g. less breakouts this week, slight dryness on cheeks..."></textarea>
+          </div>
+          <button class="btn-primary" onclick="logWeek()" style="width:100%">Save This Week's Log</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-title-icon">📊</span> Your Progress Chart</div>
+        <div class="chart-area"><canvas id="progressChart"></canvas></div>
+        <div class="tracker-logs" id="trackerLogs">
+          <div class="empty-state">
+            <div class="empty-state-icon">📋</div>
+            No logs yet — start tracking this week!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROUTINE / REMINDERS ===== -->
+<section id="routine" class="section">
+  <div class="routine-wrapper">
+    <div class="page-header">
+      <h2>⏰ Reminders & Routine</h2>
+      <p>Set reminders for your daily routine — get notified right here in Chrome</p>
+    </div>
+
+    <div id="noRoutineMsg" class="no-routine-msg">
+      <div class="no-routine-icon">🌿</div>
+      <h3>No routine saved yet</h3>
+      <p>Take the quiz to get your personalized routine</p>
+      <button class="btn-primary" onclick="showSection('quiz')">Take Quiz →</button>
+    </div>
+
+    <div id="routineContent" style="display:none">
+
+      <!-- REMINDER CARDS -->
+      <div class="reminder-cards">
+        <!-- Morning -->
+        <div class="rem-card">
+          <div class="rem-card-header">
+            <span class="rem-card-icon">☀️</span>
+            <span class="rem-card-title">Morning Reminder</span>
+          </div>
+          <div class="rem-card-body">
+            <div class="rem-row">
+              <label class="rem-field-label">Date</label>
+              <input type="date" id="morningDate" class="rem-date-input"/>
+            </div>
+            <div class="rem-row">
+              <label class="rem-field-label">Time</label>
+              <div class="rem-time-wrap">
+                <select id="morningHour" class="rem-select">
+                  <option value="1">01</option><option value="2">02</option>
+                  <option value="3">03</option><option value="4">04</option>
+                  <option value="5">05</option><option value="6">06</option>
+                  <option value="7" selected>07</option><option value="8">08</option>
+                  <option value="9">09</option><option value="10">10</option>
+                  <option value="11">11</option><option value="12">12</option>
+                </select>
+                <span class="rem-colon">:</span>
+                <select id="morningMin" class="rem-select">
+                  <option value="0" selected>00</option><option value="5">05</option>
+                  <option value="10">10</option><option value="15">15</option>
+                  <option value="20">20</option><option value="25">25</option>
+                  <option value="30">30</option><option value="35">35</option>
+                  <option value="40">40</option><option value="45">45</option>
+                  <option value="50">50</option><option value="55">55</option>
+                </select>
+                <select id="morningAmpm" class="rem-select">
+                  <option value="AM" selected>AM</option>
+                  <option value="PM">PM</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="rem-set-btn" onclick="setReminder('morning')">🔔 Set Morning Reminder</button>
+          <div id="morningCountdown" class="rb-countdown"></div>
+        </div>
+
+        <!-- Night -->
+        <div class="rem-card">
+          <div class="rem-card-header">
+            <span class="rem-card-icon">🌙</span>
+            <span class="rem-card-title">Night Reminder</span>
+          </div>
+          <div class="rem-card-body">
+            <div class="rem-row">
+              <label class="rem-field-label">Date</label>
+              <input type="date" id="nightDate" class="rem-date-input"/>
+            </div>
+            <div class="rem-row">
+              <label class="rem-field-label">Time</label>
+              <div class="rem-time-wrap">
+                <select id="nightHour" class="rem-select">
+                  <option value="1">01</option><option value="2">02</option>
+                  <option value="3">03</option><option value="4">04</option>
+                  <option value="5">05</option><option value="6">06</option>
+                  <option value="7">07</option><option value="8">08</option>
+                  <option value="9" selected>09</option><option value="10">10</option>
+                  <option value="11">11</option><option value="12">12</option>
+                </select>
+                <span class="rem-colon">:</span>
+                <select id="nightMin" class="rem-select">
+                  <option value="0" selected>00</option><option value="5">05</option>
+                  <option value="10">10</option><option value="15">15</option>
+                  <option value="20">20</option><option value="25">25</option>
+                  <option value="30">30</option><option value="35">35</option>
+                  <option value="40">40</option><option value="45">45</option>
+                  <option value="50">50</option><option value="55">55</option>
+                </select>
+                <select id="nightAmpm" class="rem-select">
+                  <option value="AM">AM</option>
+                  <option value="PM" selected>PM</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="rem-set-btn" onclick="setReminder('night')">🔔 Set Night Reminder</button>
+          <div id="nightCountdown" class="rb-countdown"></div>
+        </div>
+      </div>
+
+      <!-- ROUTINE STEPS -->
+      <div class="routine-steps-section">
+        <div class="routine-tabs">
+          <button class="tab-btn active" onclick="switchTab(this,'morning')">☀️ Morning Routine</button>
+          <button class="tab-btn" onclick="switchTab(this,'night')">🌙 Night Routine</button>
+        </div>
+        <div id="morningRoutine">
+          <div id="morningList" class="routine-list"></div>
+        </div>
+        <div id="nightRoutine" style="display:none">
+          <div id="nightList" class="routine-list"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI CHAT ===== -->
+<div class="chat-bubble" id="chatBubble" onclick="toggleChat()">
+  <span class="chat-icon">🌿</span>
+  <span>Ask AI Assistant</span>
+  <div class="chat-notif" id="chatNotif">1</div>
+</div>
+
+<div class="chat-box" id="chatBox">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-avatar">🌿</div>
+      <div>
+        <div class="chat-name">Bodywise AI Assistant</div>
+        <div class="chat-status"><span class="status-dot"></span> Online — ask me anything</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      <div class="msg-bubble">Hi! I'm your Bodywise skin & hair assistant 🌿<br/><br/>Ask me about ingredients, what products suit your skin, how long results take, or anything about your skincare routine!</div>
+    </div>
+    <div class="chat-suggestions">
+      <button class="suggestion-btn" onclick="sendSuggestion(this)">Best products for oily skin?</button>
+      <button class="suggestion-btn" onclick="sendSuggestion(this)">How long to see results?</button>
+      <button class="suggestion-btn" onclick="sendSuggestion(this)">Is niacinamide safe daily?</button>
+      <button class="suggestion-btn" onclick="sendSuggestion(this)">Tips for hair fall?</button>
+    </div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInput" placeholder="Ask about skin, hair, products..." onkeypress="handleChatKey(event)"/>
+    <button class="chat-send" onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
