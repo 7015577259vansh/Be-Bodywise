@@ -26,3 +26,4 @@ Open index.html in your browser.
 Vansh Aggarwal
 
 GitHub: https://github.com/7015577259vansh
+Live:  https://bodywise-app.vercel.app/#
